@@ -65,7 +65,7 @@ public class TransformHelper {
           helperMatrix,
           convertToRadians(transform, transformType));
       } else if ("scale".equals(transformType)) {
-        double scale = transform.getDouble(transformType);
+        double scale = transform.getDouble(transformType!=null && !"null".equalsIgnoreCase(transformType) ? transformType : 0);
         MatrixMathHelper.applyScaleX(helperMatrix, scale);
         MatrixMathHelper.applyScaleY(helperMatrix, scale);
       } else if ("scaleX".equals(transformType)) {
