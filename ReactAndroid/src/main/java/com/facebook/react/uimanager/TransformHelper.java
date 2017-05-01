@@ -69,9 +69,11 @@ public class TransformHelper {
         MatrixMathHelper.applyScaleX(helperMatrix, scale);
         MatrixMathHelper.applyScaleY(helperMatrix, scale);
       } else if ("scaleX".equals(transformType)) {
-        MatrixMathHelper.applyScaleX(helperMatrix, transform.getDouble(transformType));
+        double scaleX = transform.isNull(transformType) ? 0.0d :  transform.getDouble(transformType);
+        MatrixMathHelper.applyScaleX(helperMatrix, scaleX);
       } else if ("scaleY".equals(transformType)) {
-        MatrixMathHelper.applyScaleY(helperMatrix, transform.getDouble(transformType));
+        double scaleY = transform.isNull(transformType) ? 0.0d :  transform.getDouble(transformType);
+        MatrixMathHelper.applyScaleY(helperMatrix, scaleY);
       } else if ("translate".equals(transformType)) {
         ReadableArray value = transform.getArray(transformType);
         double x = value.getDouble(0);
@@ -79,9 +81,11 @@ public class TransformHelper {
         double z = value.size() > 2 ? value.getDouble(2) : 0d;
         MatrixMathHelper.applyTranslate3D(helperMatrix, x, y, z);
       } else if ("translateX".equals(transformType)) {
-        MatrixMathHelper.applyTranslate2D(helperMatrix, transform.getDouble(transformType), 0d);
+        double translateX = transform.isNull(transformType) ? 0.0d :  transform.getDouble(transformType);
+        MatrixMathHelper.applyTranslate2D(helperMatrix, translateX, 0d);
       } else if ("translateY".equals(transformType)) {
-        MatrixMathHelper.applyTranslate2D(helperMatrix, 0d, transform.getDouble(transformType));
+        double translateY = transform.isNull(transformType) ? 0.0d :  transform.getDouble(transformType);
+        MatrixMathHelper.applyTranslate2D(helperMatrix, 0d, translateY);
       } else if ("skewX".equals(transformType)) {
         MatrixMathHelper.applySkewX(
           helperMatrix,
