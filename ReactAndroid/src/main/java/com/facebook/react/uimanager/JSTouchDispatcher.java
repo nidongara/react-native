@@ -132,6 +132,7 @@ public class JSTouchDispatcher {
           mTargetTag,
           TouchEventType.START,
           ev,
+          mGestureStartTime,
           mTargetCoordinates[0],
           mTargetCoordinates[1],
           mTouchEventCoalescingKeyHelper));
