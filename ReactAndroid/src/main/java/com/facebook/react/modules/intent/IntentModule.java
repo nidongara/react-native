@@ -20,6 +20,11 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
 
 /**
  * Intent module. Launch other activities or open URLs.
@@ -30,6 +35,8 @@ public class IntentModule extends ReactContextBaseJavaModule {
   public IntentModule(ReactApplicationContext reactContext) {
     super(reactContext);
   }
+
+  public static Uri intialUrl = null;
 
   @Override
   public String getName() {
@@ -46,14 +53,14 @@ public class IntentModule extends ReactContextBaseJavaModule {
     try {
       Activity currentActivity = getCurrentActivity();
       String initialURL = null;
-
       if (currentActivity != null) {
         Intent intent = currentActivity.getIntent();
         String action = intent.getAction();
         Uri uri = intent.getData();
-
         if (Intent.ACTION_VIEW.equals(action) && uri != null) {
           initialURL = uri.toString();
+        }else{
+          initialURL = intialUrl != null ? intialUrl.toString() : null;
         }
       }
 
