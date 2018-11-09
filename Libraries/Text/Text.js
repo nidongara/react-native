@@ -10,7 +10,7 @@
  * @flow
  */
 'use strict';
-
+import DeviceInfo from 'react-native-device-info'
 const NativeMethodsMixin = require('react/lib/NativeMethodsMixin');
 const Platform = require('Platform');
 const React = require('React');
@@ -312,6 +312,11 @@ const Text = React.createClass({
         ...newProps,
         style: [this.props.style, {color: 'magenta'}],
       };
+    }
+    if(DeviceInfo.getModel() && DeviceInfo.getModel().toLowerCase().indexOf('oneplus') > -1 && typeof newProps.children === 'string'){
+      const propsToPass =  Object.assign({},newProps)
+      propsToPass.children = newProps.children + ' '
+      newProps = propsToPass
     }
     if (this.context.isInAParentText) {
       return <RCTVirtualText {...newProps} />;
